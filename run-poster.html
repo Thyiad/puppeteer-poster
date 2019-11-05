@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="" />
+  <meta name="description" content="走路换保障，0元享最高50000重疾保障" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0,viewport-fit=cover" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="screen-orientation" content="portrait" />
+  <meta name="full-screen" content="yes" />
+  <meta name="browsermode" content="application" />
+  <meta name="x5-orientation" content="portrait" />
+  <meta name="x5-fullscreen" content="true" />
+  <meta name="x5-page-mode" content="app" />
+  <link rel="icon" href="https://a.zhongan.com/favicon.ico">
+  <title>步步保</title>
+  <style>
+    html,
+    body,
+    div,
+    span,
+    applet,
+    object,
+    iframe,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote,
+    pre,
+    a,
+    abbr,
+    acronym,
+    address,
+    big,
+    cite,
+    code,
+    del,
+    dfn,
+    em,
+    img,
+    ins,
+    kbd,
+    q,
+    s,
+    samp,
+    small,
+    strike,
+    strong,
+    sub,
+    sup,
+    tt,
+    var,
+    b,
+    u,
+    i,
+    center,
+    dl,
+    dt,
+    dd,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    legend,
+    table,
+    caption,
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td,
+    article,
+    aside,
+    canvas,
+    details,
+    embed,
+    figure,
+    figcaption,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    output,
+    ruby,
+    section,
+    summary,
+    time,
+    mark,
+    audio,
+    video {
+        font: inherit;
+        font-size: 100%;
+        margin: 0;
+        padding: 0;
+        vertical-align: baseline;
+        border: 0;
+        box-sizing: border-box;
+    }
+    html {
+        color: #000;
+        background: #f2f2f2;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        word-break:break-all;
+    }
+    html, body {
+        height: 100%;
+        background: white;
+    }
+    #app{
+        width: 7.5rem;
+        height: 12.78rem;
+        background: url(https://static.zhongan.com/website/assets/wxapp/dm-run/poster/posterRank.png) 0 0/100% 100% no-repeat;
+        position: relative;
+    }
+    #header{
+      position: absolute;
+      height: 1.5rem;
+      top: 0.6rem;
+      left: 0.5rem;
+      right: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+    .avatar{
+      width: 1rem;
+      height: 1rem;
+      margin-left: 0.5rem;
+      border-radius: 50%;;
+    }
+    .title-right{
+      flex: 1;
+      margin-left: 0.2rem;
+      color: #1C1F32;
+    }
+    .title-name{
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 26px;
+    }
+    .title-desc{
+      font-size: 14px;
+    }
+    .barcode{
+      position: absolute;
+      width: 1.5rem;
+      right: 0.8rem;
+      bottom: 0.8rem;
+    }
+  </style>
+  <script src="https://static-insurance-cdn.zhongan.com/mobile/lib/rem.js"></script>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div id="header">
+      <img :src="avatar" class="avatar" alt="">
+      <div class="title-right">
+        <div class="title-name">{{name}}</div>
+        <div class="title-desc">{{desc}}</div>
+      </div>
+    </div>
+    <img :src="barcode" class="barcode" alt="">
+  </div>
+  <script type="text/javascript">
+
+    function getQueryObj(variable){
+      var obj = {};
+      var query = window.location.search.substring(1);
+      var vars = query.split("&");
+      for (var i=0;i<vars.length;i++) {
+              var pair = vars[i].split("=");
+              if(pair[0]){
+                obj[pair[0]]= decodeURIComponent(pair[1]);
+              }
+      }
+      return obj;
+    }
+
+    var queryObj = getQueryObj();
+
+    var vue = new Vue({
+        el: '#app',
+        data: {
+            avatar: queryObj.avatar,
+            name: queryObj.name,
+            desc: '邀你一起加入步数排行',
+            barcode: queryObj.barcode,
+        },
+    })
+  </script>
+</body>
+</html>

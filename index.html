@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+  <div id="app" style="text-align: center;">
+    <div style="margin: 15px; auto;">具体生成页面及传入参数由自己控制<br>比如步步保这个示例，需要传入头像、昵称及二维码，通过url参数传递</div>
+        <el-input
+        placeholder="请输入html路径"
+        v-model="htmlUrl">
+      </el-input>
+    <el-button @click="makePoster" :loading="loading" style="margin: auto;margin-top: 15px;display: block;">制作海报</el-button>
+    <img v-show="showPosterResult" :src="posterUrl" style="margin: auto;margin-top: 15px;width: 375px;height: auto;display: block;margin: auto;" alt="">
+  </div>
+</body>
+  <!-- import Vue before Element -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: function() {
+        return { 
+            htmlUrl: 'https://staticdaily.zhongan.com/website/life-insurance-crm/run-poster.html?avatar=https://open-prd.oss-cn-hzfinance.aliyuncs.com/dm-account/headimg/nWSze1ii2f0DQpGrmLulogGVNttCDArL.png&name=Thyiad&barcode=https%3A%2F%2Fgwbk-uat.zhongan.com%2Fappapi%2Fdm-account%2Fminiapp%2Fgetwxacode%3Fchannel%3D1800%26scene%3D1%26path%3Dpages%2FrankList%2Findex%26width%3D75px%26isHyaline%3Dtrue',
+            loading: false,
+            posterUrl: '',
+            showPosterResult: false,
+         }
+      },
+      methods: {
+          makePoster(){
+            if(!this.htmlUrl){
+            this.$message({
+                message: '地址不能为空',
+                type: 'warning'
+            });
+            return;
+            }
+
+            this.loading=true;
+            
+            $.post('/poster', {url: this.htmlUrl}).done(res=>{
+                if(res.code==200){
+                    this.$message({
+                        message: '生成海报成功！',
+                        type: 'success'
+                    });
+                    this.posterUrl = res.data.posterUrl;
+                    this.showPosterResult=true;
+                }
+                this.loading=false;
+            }).fail(e=>{
+                console.log(e);
+                this.loading=false;
+            })
+          }
+      }
+    })
+  </script>
+</html>
