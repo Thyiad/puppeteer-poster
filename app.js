@@ -75,11 +75,13 @@ router.all('/poster', async(ctx, next)=>{
         const targetFileName = stringRandom(6)+"_"+utils.formatDate(Date.now(),3)+".png";
         const targetFilePath = path.join(targetDir, targetFileName);
 
-        // start work
+        // 单例：全局维持一个browser实例
         const browser = await config.getBrowserInstance();
+        // 可优化：维护一个pagePool，类似线程池，减少消耗
         const page = await browser.newPage();
         await page.emulate(targetDevice);
         await page.goto(req.url, {waitUntil: "networkidle0"});
+        // 可优化：海报html放在项目内，本地加载更快
         await page.screenshot({path: targetFilePath, fullPage: false});
         page.close();
 
